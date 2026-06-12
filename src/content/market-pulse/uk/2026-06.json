@@ -1,0 +1,23 @@
+{
+  "marketCode": "GB",
+  "marketSlug": "uk",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "United Kingdom",
+  "metrics": {
+    "priceTrendYoY": 2.9,
+    "rentTrendYoY": 6.2,
+    "mortgageRate": 4.85,
+    "mortgageRateTrend": "flat",
+    "transactionVolumeYoY": -1.2,
+    "affordabilityPressure": "high",
+    "regulatoryRisk": "medium"
+  },
+  "sources": [
+    { "name": "UK House Price Index", "publisher": "ONS", "date": "2026-04", "accessType": "public_report" },
+    { "name": "Bank Rate impact", "publisher": "Bank of England", "date": "2026-05", "accessType": "public_report" }
+  ],
+  "disclaimer": "Market Pulse PRO is an indicative reading based on public sources and editable assumptions. Not financial, tax, legal advice or investment recommendation."
+}

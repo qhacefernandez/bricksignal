@@ -1,0 +1,25 @@
+---
+import { MARKETS } from '@/config/markets';
+import { t } from '@/i18n/messages';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>404 — BrickSignal</title>
+  </head>
+  <body class="min-h-screen bg-slate-50 font-sans">
+    <main class="mx-auto max-w-lg px-4 py-16 text-center">
+      <h1 class="text-3xl font-bold">404</h1>
+      <p class="mt-2 text-slate-600">{t('en', 'error.invalidMarket')}</p>
+      <div class="mt-8 grid gap-2">
+        {MARKETS.map((m) => (
+          <a href={`/${m.slug}/`} class="rounded-lg border bg-white px-4 py-2 text-sm hover:bg-slate-50">{m.nativeName}</a>
+        ))}
+      </div>
+      <a href="/" class="mt-6 inline-block text-brand-600 underline">Global home</a>
+    </main>
+  </body>
+</html>

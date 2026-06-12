@@ -1,0 +1,23 @@
+---
+import { getMarket, isValidMarketSlug } from '@/config/markets';
+import { marketStaticPaths } from '@/lib/staticPaths';
+import MarketLayout from '@/layouts/MarketLayout.astro';
+import { marketPath } from '@/i18n/routes';
+import type { MarketSlug } from '@/config/types';
+
+export function getStaticPaths() {
+  return marketStaticPaths();
+}
+
+const { market: marketParam } = Astro.params;
+if (!marketParam || !isValidMarketSlug(marketParam)) return Astro.redirect('/404');
+const market = getMarket(marketParam as MarketSlug);
+---
+
+<MarketLayout market={market.slug} pathSegment="guia/rentabilidad-alquiler">
+  <article class="prose max-w-none">
+    <h1>Rental yield guide — {market.nativeName}</h1>
+    <p>Indicative concepts: gross yield, net yield, cash flow, IRR. <a href={marketPath(market.slug, 'simulator')}>Try the simulator</a>.</p>
+    <p class="text-sm text-slate-500">{market.taxProfile.disclaimer}</p>
+  </article>
+</MarketLayout>

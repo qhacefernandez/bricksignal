@@ -1,0 +1,23 @@
+{
+  "marketCode": "US",
+  "marketSlug": "us",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "United States",
+  "metrics": {
+    "priceTrendYoY": 4.5,
+    "rentTrendYoY": 3.8,
+    "mortgageRate": 6.75,
+    "mortgageRateTrend": "up",
+    "transactionVolumeYoY": -3.5,
+    "affordabilityPressure": "high",
+    "regulatoryRisk": "low"
+  },
+  "sources": [
+    { "name": "FHFA HPI", "publisher": "FHFA", "date": "2026-Q1", "accessType": "public_report" },
+    { "name": "PMMS 30-year", "publisher": "Freddie Mac", "date": "2026-05", "accessType": "public_report" }
+  ],
+  "disclaimer": "Market Pulse PRO is an indicative reading based on public sources and editable assumptions. Not financial, tax, legal advice or investment recommendation."
+}

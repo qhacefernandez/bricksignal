@@ -1,0 +1,40 @@
+{
+  "name": "bricksignal",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "dev:netlify": "netlify dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.1",
+    "@astrojs/tailwind": "^6.0.2",
+    "@radix-ui/react-slider": "^1.4.0",
+    "astro": "^5.7.10",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "recharts": "^2.15.3",
+    "stripe": "^18.1.0",
+    "tailwindcss": "^3.4.17",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@netlify/functions": "^3.1.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "jsdom": "^29.1.1",
+    "netlify-cli": "^26.1.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.2"
+  }
+}

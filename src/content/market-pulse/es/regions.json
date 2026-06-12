@@ -1,0 +1,87 @@
+{
+  "Madrid": {
+    "geographyLevel": "region",
+    "geographyName": "Madrid",
+    "metrics": {
+      "priceTrendYoY": 6.8,
+      "rentTrendYoY": 9.2,
+      "affordabilityPressure": "high",
+      "regulatoryRisk": "medium"
+    },
+    "narrative": {
+      "headline": "Madrid: demanda sólida con márgenes más ajustados",
+      "summary": "La capital concentra liquidez y alquiler estable, pero la presión de precios comprime el margen neto frente a otras comunidades.",
+      "positives": ["Alta demanda de alquiler", "Liquidez de reventa superior a la media nacional"],
+      "risks": ["Precio de entrada elevado", "Competencia en zonas prime"],
+      "watchlist": ["Evolución tipos hipotecarios", "Oferta nueva en corredor norte-sur"]
+    }
+  },
+  "Cataluña": {
+    "geographyLevel": "region",
+    "geographyName": "Cataluña",
+    "metrics": {
+      "priceTrendYoY": 4.9,
+      "rentTrendYoY": 8.1,
+      "affordabilityPressure": "high",
+      "regulatoryRisk": "high"
+    },
+    "narrative": {
+      "headline": "Cataluña: rentas resilientes, marco regulatorio exigente",
+      "summary": "Barcelona y área metropolitana mantienen tensiones de alquiler, con normativa local que exige análisis fino de cada operación.",
+      "positives": ["Mercado de alquiler profundo", "Diversidad de municipios con perfiles distintos"],
+      "risks": ["Regulación y licencias", "Coste de entrada en zonas centrales"],
+      "watchlist": ["Normativa de alquiler", "Oferta turística regulada"]
+    }
+  },
+  "Comunidad Valenciana": {
+    "geographyLevel": "region",
+    "geographyName": "Comunidad Valenciana",
+    "metrics": {
+      "priceTrendYoY": 5.5,
+      "rentTrendYoY": 7.4,
+      "affordabilityPressure": "medium",
+      "regulatoryRisk": "medium"
+    },
+    "narrative": {
+      "headline": "Comunidad Valenciana: equilibrio precio-renta más favorable",
+      "summary": "Valencia y Alicante ofrecen entradas más moderadas con rentas en crecimiento, atractivo para inversores que buscan cashflow.",
+      "positives": ["Mejor relación precio/alquiler que media nacional", "Demanda residencial estable"],
+      "risks": ["Estacionalidad turística en costa", "Stock en algunas zonas saturado"],
+      "watchlist": ["Nuevas licencias turísticas", "Transporte y empleo regional"]
+    }
+  },
+  "Andalucía": {
+    "geographyLevel": "region",
+    "geographyName": "Andalucía",
+    "metrics": {
+      "priceTrendYoY": 4.1,
+      "rentTrendYoY": 6.2,
+      "affordabilityPressure": "medium",
+      "regulatoryRisk": "low"
+    },
+    "narrative": {
+      "headline": "Andalucía: entrada accesible con rentabilidad bruta competitiva",
+      "summary": "Sevilla, Málaga y capitales provinciales combinan precios moderados con demanda de alquiler creciente.",
+      "positives": ["Ticket de entrada más bajo", "Demografía en expansión en grandes ciudades"],
+      "risks": ["Desempleo estructural en interior", "Estacionalidad en costa"],
+      "watchlist": ["Turismo en Málaga y Costa del Sol", "Infraestructura"]
+    }
+  },
+  "País Vasco": {
+    "geographyLevel": "region",
+    "geographyName": "País Vasco",
+    "metrics": {
+      "priceTrendYoY": 3.8,
+      "rentTrendYoY": 5.9,
+      "affordabilityPressure": "high",
+      "regulatoryRisk": "low"
+    },
+    "narrative": {
+      "headline": "País Vasco: estabilidad y calidad de demanda",
+      "summary": "Mercado maduro con precios altos pero alquiler solvente; conviene priorizar cashflow y fiscalidad local.",
+      "positives": ["Poder adquisitivo del inquilino", "Baja vacancia estructural"],
+      "risks": ["Precio de compra elevado", "Rendimiento neto comprimido"],
+      "watchlist": ["Tipos de interés", "Oferta de obra nueva"]
+    }
+  }
+}

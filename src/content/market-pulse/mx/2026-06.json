@@ -1,0 +1,22 @@
+{
+  "marketCode": "MX",
+  "marketSlug": "mx",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "México",
+  "metrics": {
+    "priceTrendYoY": 7.2,
+    "rentTrendYoY": 9.1,
+    "mortgageRate": 10.8,
+    "mortgageRateTrend": "flat",
+    "affordabilityPressure": "medium",
+    "regulatoryRisk": "medium"
+  },
+  "sources": [
+    { "name": "Índice SHF", "publisher": "SHF", "date": "2026-Q1", "accessType": "public_report" },
+    { "name": "Tasa objetivo", "publisher": "Banxico", "date": "2026-05", "accessType": "public_report" }
+  ],
+  "disclaimer": "Market Pulse PRO es una lectura orientativa basada en fuentes públicas, datos autorizados e hipótesis editables. No constituye asesoramiento financiero, fiscal, legal ni recomendación de inversión."
+}

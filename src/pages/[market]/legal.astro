@@ -1,0 +1,24 @@
+---
+import { getMarket, isValidMarketSlug } from '@/config/markets';
+import { marketStaticPaths } from '@/lib/staticPaths';
+import MarketLayout from '@/layouts/MarketLayout.astro';
+import type { MarketSlug } from '@/config/types';
+
+export function getStaticPaths() {
+  return marketStaticPaths();
+}
+
+const { market: marketParam } = Astro.params;
+if (!marketParam || !isValidMarketSlug(marketParam)) return Astro.redirect('/404');
+const market = getMarket(marketParam as MarketSlug);
+---
+
+<MarketLayout market={market.slug} pathSegment="legal">
+  <article class="max-w-2xl space-y-4 text-slate-700">
+    <h1 class="text-3xl font-bold">Legal — {market.nativeName}</h1>
+    <p><strong>[EDIT]</strong> Legal entity details for {market.name}.</p>
+    <p>{market.legal.disclaimer}</p>
+    <p>{market.legal.noAdviceNotice}</p>
+    <p>{market.legal.dataNotice}</p>
+  </article>
+</MarketLayout>

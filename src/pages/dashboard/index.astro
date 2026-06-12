@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DashboardPrototype from '../../components/radar/DashboardPrototype';
+---
+
+<Layout title="Dashboard — Radar Pro" noindex={true}>
+  <DashboardPrototype
+    title="Dashboard"
+    description="Resumen de búsquedas, oportunidades y alertas."
+  >
+    <div class="grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl border border-slate-200 bg-white p-5">
+        <p class="text-sm text-slate-500">Búsquedas activas</p>
+        <p class="text-3xl font-bold text-slate-900">—</p>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-5">
+        <p class="text-sm text-slate-500">Oportunidades esta semana</p>
+        <p class="text-3xl font-bold text-slate-900">—</p>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-5">
+        <p class="text-sm text-slate-500">Plan actual</p>
+        <p class="text-3xl font-bold text-slate-900">—</p>
+      </div>
+    </div>
+  </DashboardPrototype>
+</Layout>

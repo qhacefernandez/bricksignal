@@ -1,0 +1,22 @@
+{
+  "marketCode": "IT",
+  "marketSlug": "it",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "Italia",
+  "metrics": {
+    "priceTrendYoY": 3.8,
+    "rentTrendYoY": 5.5,
+    "mortgageRate": 3.65,
+    "mortgageRateTrend": "down",
+    "affordabilityPressure": "medium",
+    "regulatoryRisk": "medium"
+  },
+  "sources": [
+    { "name": "IPAB", "publisher": "ISTAT", "date": "2026-Q1", "accessType": "public_report" },
+    { "name": "Tassi mutui", "publisher": "Banca d'Italia", "date": "2026-05", "accessType": "public_report" }
+  ],
+  "disclaimer": "Market Pulse PRO es una lectura orientativa basada en fuentes públicas, datos autorizados e hipótesis editables. No constituye asesoramiento financiero, fiscal, legal ni recomendación de inversión."
+}

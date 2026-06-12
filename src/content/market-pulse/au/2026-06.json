@@ -1,0 +1,22 @@
+{
+  "marketCode": "AU",
+  "marketSlug": "au",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "Australia",
+  "metrics": {
+    "priceTrendYoY": 5.8,
+    "rentTrendYoY": 7.5,
+    "mortgageRate": 6.2,
+    "mortgageRateTrend": "down",
+    "affordabilityPressure": "high",
+    "regulatoryRisk": "medium"
+  },
+  "sources": [
+    { "name": "Residential Property Price Index", "publisher": "ABS", "date": "2026-Q1", "accessType": "public_report" },
+    { "name": "Lending rates", "publisher": "RBA", "date": "2026-05", "accessType": "public_report" }
+  ],
+  "disclaimer": "Market Pulse PRO is an indicative reading based on public sources and editable assumptions. Not financial, tax, legal advice or investment recommendation."
+}

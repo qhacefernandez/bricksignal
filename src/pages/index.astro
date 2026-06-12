@@ -1,0 +1,44 @@
+---
+import { MARKETS } from '@/config/markets';
+import { DEFAULT_MARKET_SLUG } from '@/config/featureFlags';
+import { getHreflangAlternates } from '@/i18n/routes';
+import { t } from '@/i18n/messages';
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || Astro.site?.href || 'https://bricksignal.netlify.app';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BrickSignal — International rental property investment calculator</title>
+    <meta name="description" content="Calculate rental yield and cash flow in Spain, UK, US, Portugal, Italy, Mexico, Australia and Ireland." />
+    {getHreflangAlternates(siteUrl).map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+    ))}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen bg-slate-50 font-sans antialiased">
+    <main class="mx-auto max-w-4xl px-4 py-16 text-center">
+      <h1 class="text-4xl font-bold text-slate-900">BrickSignal</h1>
+      <p class="mt-4 text-lg text-slate-600">{t('en', 'hero.subtitle')}</p>
+      <p class="mt-2 text-sm text-slate-500">{t('en', 'global.selectCountry')}</p>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        {MARKETS.map((m) => (
+          <a
+            href={`/${m.slug}/`}
+            class={`rounded-xl border bg-white p-5 text-left transition hover:border-brand-400 hover:shadow-md ${m.slug === DEFAULT_MARKET_SLUG ? 'border-brand-300 ring-1 ring-brand-200' : 'border-slate-200'}`}
+          >
+            <p class="font-semibold text-slate-900">{m.nativeName}</p>
+            <p class="text-sm text-slate-500">{m.currency} · {m.locale}</p>
+            {m.slug === DEFAULT_MARKET_SLUG && (
+              <span class="mt-2 inline-block text-xs font-medium text-brand-600">{t('en', 'global.recommended')}</span>
+            )}
+          </a>
+        ))}
+      </div>
+      <p class="mt-10 text-xs text-slate-400">No geolocation. Choose your market manually.</p>
+    </main>
+  </body>
+</html>

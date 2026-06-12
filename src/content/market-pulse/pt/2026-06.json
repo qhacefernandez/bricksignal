@@ -1,0 +1,23 @@
+{
+  "marketCode": "PT",
+  "marketSlug": "pt",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "Portugal",
+  "metrics": {
+    "priceTrendYoY": 6.1,
+    "rentTrendYoY": 8.2,
+    "mortgageRate": 3.45,
+    "mortgageRateTrend": "flat",
+    "transactionVolumeYoY": 1.8,
+    "affordabilityPressure": "medium",
+    "regulatoryRisk": "low"
+  },
+  "sources": [
+    { "name": "Índice preços habitação", "publisher": "INE Portugal", "date": "2026-Q1", "accessType": "public_report" },
+    { "name": "Euribor", "publisher": "Banco de Portugal", "date": "2026-05", "accessType": "public_report" }
+  ],
+  "disclaimer": "Market Pulse PRO es una lectura orientativa basada en fuentes públicas, datos autorizados e hipótesis editables. No constituye asesoramiento financiero, fiscal, legal ni recomendación de inversión."
+}

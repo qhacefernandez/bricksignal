@@ -1,0 +1,21 @@
+---
+import { getMarket, isValidMarketSlug } from '@/config/markets';
+import { marketStaticPaths } from '@/lib/staticPaths';
+import MarketLayout from '@/layouts/MarketLayout.astro';
+import MarketPricingPage from '@/components/market/MarketPricingPage';
+import { getPricingPageCopy } from '@/i18n/pricingCopy';
+import type { MarketSlug } from '@/config/types';
+
+export function getStaticPaths() {
+  return marketStaticPaths();
+}
+
+const { market: marketParam } = Astro.params;
+if (!marketParam || !isValidMarketSlug(marketParam)) return Astro.redirect('/404');
+const market = getMarket(marketParam as MarketSlug);
+const pricingMeta = getPricingPageCopy(market.language);
+---
+
+<MarketLayout market={market.slug} pathSegment="precios" title={`${pricingMeta.pageTitle} — ${market.nativeName} | BrickSignal`} description={pricingMeta.pageDescription}>
+  <MarketPricingPage client:load market={market} />
+</MarketLayout>

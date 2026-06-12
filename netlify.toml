@@ -1,0 +1,27 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  # Stripe must not be bundled — esbuild breaks its HTTP client in serverless.
+  external_node_modules = ["stripe"]
+
+[[redirects]]
+  from = "/simulador"
+  to = "/es/simulador"
+  status = 302
+
+[[redirects]]
+  from = "/precios"
+  to = "/es/precios"
+  status = 302
+
+[[redirects]]
+  from = "/radar"
+  to = "/es/radar"
+  status = 302
+
+[build.environment]
+  NODE_VERSION = "20"

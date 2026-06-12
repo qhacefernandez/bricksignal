@@ -1,0 +1,99 @@
+---
+import { getMarket, isValidMarketSlug } from '@/config/markets';
+import { getHreflangAlternates } from '@/i18n/routes';
+import { t } from '@/i18n/messages';
+import { marketPath } from '@/i18n/routes';
+import type { MarketSlug } from '@/config/types';
+import MarketSelector from '@/components/market/MarketSelector';
+
+interface Props {
+  market: MarketSlug;
+  title?: string;
+  description?: string;
+  pathSegment?: string;
+  noindex?: boolean;
+}
+
+const { market, title, description, pathSegment = '', noindex = false } = Astro.props;
+
+if (!isValidMarketSlug(market)) {
+  return Astro.redirect('/404');
+}
+
+const marketConfig = getMarket(market);
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || Astro.site?.href || 'https://bricksignal.netlify.app';
+const seo = marketConfig.seo;
+const pageTitle = title ?? seo.title;
+const pageDescription = description ?? seo.description;
+const canonicalUrl = `${siteUrl}${marketPath(market)}${pathSegment ? `/${pathSegment}` : ''}`;
+const hreflangs = getHreflangAlternates(siteUrl);
+const msg = (key: Parameters<typeof t>[1]) => t(marketConfig.language, key);
+---
+
+<!doctype html>
+<html lang={marketConfig.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content={seo.keywords.join(', ')} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonicalUrl} />
+    {hreflangs.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={`${alt.href}${pathSegment ? pathSegment : ''}`} />
+    ))}
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={marketConfig.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen bg-slate-50 font-sans text-slate-900 antialiased">
+    <header class="border-b border-slate-200 bg-white">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4">
+        <a href={marketPath(market)} class="text-xl font-bold text-brand-700">BrickSignal</a>
+        <MarketSelector client:load currentMarket={market} />
+        <nav class="flex w-full items-center justify-end gap-4 text-sm font-medium text-slate-600 sm:w-auto">
+          <a href={marketPath(market, 'simulator')} class="hover:text-brand-600">{msg('nav.simulator')}</a>
+          {marketConfig.features.radarLanding && (
+            <a href={marketPath(market, 'radar')} class="hover:text-brand-600">{msg('nav.radar')}</a>
+          )}
+          <a href={marketPath(market, 'proReport')} class="hidden md:inline hover:text-brand-600">{msg('nav.proReport')}</a>
+          <a href={marketPath(market, 'pricing')} class="hidden sm:inline hover:text-brand-600">{msg('nav.pricing')}</a>
+          <a
+            href={marketPath(market, 'simulator')}
+            class="rounded-lg bg-brand-600 px-3 py-1.5 text-white hover:bg-brand-700"
+          >
+            {msg('cta.calculate')}
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-8">
+      <slot />
+    </main>
+
+    <footer class="mt-12 border-t border-slate-200 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500">
+        <div class="flex flex-col gap-4 sm:flex-row sm:justify-between">
+          <p>© {new Date().getFullYear()} BrickSignal · {marketConfig.nativeName}</p>
+          <nav class="flex flex-wrap gap-4">
+            <a href={marketPath(market, 'legal')} class="hover:text-brand-600">Legal</a>
+            <a href={marketPath(market, 'privacy')} class="hover:text-brand-600">Privacy</a>
+            <a href={marketPath(market, 'cookies')} class="hover:text-brand-600">Cookies</a>
+          </nav>
+        </div>
+        <div class="mt-4 space-y-1 border-t border-slate-100 pt-4 text-xs leading-relaxed text-slate-500">
+          <p>{msg('disclaimer.main')}</p>
+          <p>{marketConfig.taxProfile.disclaimer}</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

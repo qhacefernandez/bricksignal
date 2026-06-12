@@ -1,0 +1,19 @@
+---
+import { getMarket, isValidMarketSlug } from '@/config/markets';
+import { marketStaticPaths } from '@/lib/staticPaths';
+import MarketLayout from '@/layouts/MarketLayout.astro';
+import MarketRadarLanding from '@/components/market/MarketRadarLanding';
+import type { MarketSlug } from '@/config/types';
+
+export function getStaticPaths() {
+  return marketStaticPaths();
+}
+
+const { market: marketParam } = Astro.params;
+if (!marketParam || !isValidMarketSlug(marketParam)) return Astro.redirect('/404');
+const market = getMarket(marketParam as MarketSlug);
+---
+
+<MarketLayout market={market.slug} pathSegment="radar" title={`Radar Pro — ${market.nativeName}`}>
+  <MarketRadarLanding client:load market={market} />
+</MarketLayout>

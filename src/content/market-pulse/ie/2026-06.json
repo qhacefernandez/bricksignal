@@ -1,0 +1,22 @@
+{
+  "marketCode": "IE",
+  "marketSlug": "ie",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "Ireland",
+  "metrics": {
+    "priceTrendYoY": 4.1,
+    "rentTrendYoY": 6.8,
+    "mortgageRate": 4.25,
+    "mortgageRateTrend": "flat",
+    "affordabilityPressure": "high",
+    "regulatoryRisk": "medium"
+  },
+  "sources": [
+    { "name": "RPPI", "publisher": "CSO Ireland", "date": "2026-Q1", "accessType": "public_report" },
+    { "name": "Mortgage rates", "publisher": "Central Bank of Ireland", "date": "2026-05", "accessType": "public_report" }
+  ],
+  "disclaimer": "Market Pulse PRO is an indicative reading based on public sources and editable assumptions. Not financial, tax, legal advice or investment recommendation."
+}

@@ -1,0 +1,83 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogType?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Calcula si un piso de alquiler realmente te deja dinero cada mes. Simulador gratuito con hipoteca, gastos, vacancia y cashflow.',
+  canonical,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || Astro.site?.href || 'https://bricksignal.netlify.app';
+const fullTitle = title.includes('BrickSignal') ? title : `${title} | BrickSignal`;
+const canonicalUrl = canonical ? new URL(canonical, siteUrl).href : Astro.url.href;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen bg-slate-50 font-sans text-slate-900 antialiased">
+    <header class="border-b border-slate-200 bg-white">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <a href="/" class="text-xl font-bold text-brand-700">BrickSignal</a>
+        <nav class="flex items-center gap-4 text-sm font-medium text-slate-600">
+          <a href="/simulador" class="hover:text-brand-600">Simulador</a>
+          <a href="/radar" class="hover:text-brand-600">Radar</a>
+          <a href="/precios" class="hidden sm:inline hover:text-brand-600">Precios</a>
+          <a href="/guia/rentabilidad-alquiler" class="hidden md:inline hover:text-brand-600">Guía</a>
+          <a
+            href="/simulador"
+            class="rounded-lg bg-brand-600 px-3 py-1.5 text-white hover:bg-brand-700"
+          >
+            Calcular gratis
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-8">
+      <slot />
+    </main>
+
+    <footer class="mt-12 border-t border-slate-200 bg-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-slate-600 sm:flex-row sm:justify-between">
+        <p>© {new Date().getFullYear()} BrickSignal. Herramienta orientativa.</p>
+        <nav class="flex flex-wrap gap-4">
+          <a href="/legal" class="hover:text-brand-600">Aviso legal</a>
+          <a href="/privacidad" class="hover:text-brand-600">Privacidad</a>
+          <a href="/cookies" class="hover:text-brand-600">Cookies</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

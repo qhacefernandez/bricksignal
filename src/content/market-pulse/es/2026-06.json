@@ -1,0 +1,28 @@
+{
+  "marketCode": "ES",
+  "marketSlug": "es",
+  "period": "2026-06",
+  "publishedAt": "2026-06-01",
+  "validUntil": "2026-07-15",
+  "geographyLevel": "national",
+  "geographyName": "España",
+  "metrics": {
+    "priceTrendYoY": 5.2,
+    "priceTrendQoQ": 1.1,
+    "rentTrendYoY": 7.8,
+    "rentTrendQoQ": 1.8,
+    "mortgageRate": 3.15,
+    "mortgageRateTrend": "down",
+    "transactionVolumeYoY": 2.4,
+    "rentalSupplyTrend": "flat",
+    "affordabilityPressure": "medium",
+    "regulatoryRisk": "medium"
+  },
+  "sources": [
+    { "name": "IPV vivienda segunda mano", "publisher": "INE", "date": "2026-05", "accessType": "public_report", "url": "https://www.ine.es" },
+    { "name": "Índice hipotecas nuevas", "publisher": "INE", "date": "2026-05", "accessType": "public_report" },
+    { "name": "Indicadores alquiler", "publisher": "MITMA/SERPAVI", "date": "2026-Q1", "accessType": "public_report" },
+    { "name": "Estadística mercado inmobiliario", "publisher": "Registradores", "date": "2026-Q1", "accessType": "manual_research" }
+  ],
+  "disclaimer": "Market Pulse PRO es una lectura orientativa basada en fuentes públicas, datos autorizados e hipótesis editables. No constituye asesoramiento financiero, fiscal, legal ni recomendación de inversión."
+}
