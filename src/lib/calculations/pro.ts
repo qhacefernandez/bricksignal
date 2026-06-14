@@ -52,6 +52,7 @@ export function expandBasicToProInput(
     financedAmount: financed,
     interestRate: basic.interestRate,
     mortgageYears: basic.mortgageYears,
+    amortizationMethod: basic.amortizationMethod,
     itpPercent: basic.purchaseCostsPercent * 0.75,
     notaryAndRegistry: purchaseCosts * 0.25,
     ibi: opEx * 0.15,

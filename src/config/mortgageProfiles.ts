@@ -1,68 +1,74 @@
 import type { MarketSlug, MortgageProfile } from './types';
 
+const frenchDefault = (profile: Omit<MortgageProfile, 'defaultAmortizationMethod'>): MortgageProfile => ({
+  ...profile,
+  defaultAmortizationMethod: 'french',
+});
+
 export const MORTGAGE_PROFILES: Record<MarketSlug, MortgageProfile> = {
-  es: {
+  es: frenchDefault({
     defaultInterestRate: 3.2,
     defaultYears: 25,
     defaultLtv: 0.7,
     mortgageTypeLabel: 'Hipoteca (sistema francés)',
     requiresRegion: true,
     notes: ['Tipo y plazo editables. No constituye oferta de financiación.'],
-  },
-  pt: {
+  }),
+  pt: frenchDefault({
     defaultInterestRate: 3.5,
     defaultYears: 30,
     defaultLtv: 0.8,
     mortgageTypeLabel: 'Crédito habitação',
     requiresRegion: false,
     notes: ['Valores orientativos. Consulta condições reais com o banco.'],
-  },
-  it: {
+  }),
+  it: frenchDefault({
     defaultInterestRate: 3.8,
     defaultYears: 25,
     defaultLtv: 0.8,
     mortgageTypeLabel: 'Mutuo ipotecario',
     requiresRegion: false,
     notes: ['Tasso e durata sono ipotesi modificabili.'],
-  },
+  }),
   uk: {
     defaultInterestRate: 4.8,
     defaultYears: 25,
     defaultLtv: 0.75,
+    defaultAmortizationMethod: 'interest_only',
     mortgageTypeLabel: 'Buy-to-let mortgage',
     requiresRegion: false,
-    notes: ['Rates vary by lender and stress tests apply.'],
+    notes: ['Rates vary by lender and stress tests apply. BTL often interest-only.'],
   },
-  us: {
+  us: frenchDefault({
     defaultInterestRate: 6.5,
     defaultYears: 30,
     defaultLtv: 0.8,
     mortgageTypeLabel: 'Investment property mortgage',
     requiresRegion: true,
     notes: ['Rates and terms vary by lender and state.'],
-  },
-  mx: {
+  }),
+  mx: frenchDefault({
     defaultInterestRate: 10.5,
     defaultYears: 20,
     defaultLtv: 0.7,
     mortgageTypeLabel: 'Crédito hipotecario',
     requiresRegion: true,
     notes: ['Tasas y plazos orientativos según banco y estado.'],
-  },
-  au: {
+  }),
+  au: frenchDefault({
     defaultInterestRate: 6.2,
     defaultYears: 30,
     defaultLtv: 0.8,
     mortgageTypeLabel: 'Investment loan',
     requiresRegion: true,
     notes: ['Rates vary by lender and state/territory.'],
-  },
-  ie: {
+  }),
+  ie: frenchDefault({
     defaultInterestRate: 4.2,
     defaultYears: 30,
     defaultLtv: 0.8,
     mortgageTypeLabel: 'Buy-to-let mortgage',
     requiresRegion: false,
     notes: ['Illustrative rates only.'],
-  },
+  }),
 };

@@ -4,13 +4,13 @@ import { getMarketPricingStrategy, getPriceConfig, MARKET_PRICE_TIERS, resolveSt
 describe('pricing', () => {
   it('applies market pricing strategy table for PRO report', () => {
     expect(getPriceConfig('es', 'pro_report')?.amount).toBe(14.9);
-    expect(getPriceConfig('pt', 'pro_report')?.amount).toBe(12.9);
+    expect(getPriceConfig('pt', 'pro_report')?.amount).toBe(14.9);
     expect(getPriceConfig('it', 'pro_report')?.amount).toBe(14.9);
     expect(getPriceConfig('uk', 'pro_report')?.amount).toBe(19.9);
     expect(getPriceConfig('us', 'pro_report')?.amount).toBe(19.9);
     expect(getPriceConfig('mx', 'pro_report')?.amount).toBe(199);
     expect(getPriceConfig('au', 'pro_report')?.amount).toBe(24.9);
-    expect(getPriceConfig('ie', 'pro_report')?.amount).toBe(19.9);
+    expect(getPriceConfig('ie', 'pro_report')?.amount).toBe(14.9);
   });
 
   it('applies market pricing strategy table for Radar tiers', () => {

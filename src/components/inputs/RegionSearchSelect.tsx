@@ -56,7 +56,7 @@ export default function RegionSearchSelect({ market, value, onChange, label }: P
           if (options.includes(e.target.value)) onChange(e.target.value);
         }}
         onFocus={() => setOpen(true)}
-        placeholder="Buscar…"
+        placeholder={value ? 'Buscar…' : `Selecciona ${regionLabel.toLowerCase()}…`}
         className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
       />
       {open && options.length > 0 && (

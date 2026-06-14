@@ -16,10 +16,13 @@ export type ProductFeature = {
   subscriptions: boolean;
 };
 
+export type AmortizationMethod = 'french' | 'linear' | 'interest_only';
+
 export type MortgageProfile = {
   defaultInterestRate: number;
   defaultYears: number;
   defaultLtv: number;
+  defaultAmortizationMethod: AmortizationMethod;
   mortgageTypeLabel: string;
   requiresRegion: boolean;
   notes: string[];
@@ -53,6 +56,16 @@ export type TaxProfile = {
   requiresRegionSelection: boolean;
   regionLabel?: string;
   disclaimer: string;
+  /** Tratamiento orientativo de intereses hipoteca sobre renta del alquiler */
+  mortgageInterestTax: {
+    mode: 'deduct_from_profit' | 'tax_credit' | 'none';
+    /** Tipo efectivo por defecto si el usuario deja el impuesto alquiler a 0 */
+    estimateTaxRatePercent: number;
+    /** Solo mode tax_credit (p. ej. Section 24 UK): crédito % sobre intereses */
+    creditRatePercent?: number;
+    /** Nota breve en panel PRO */
+    note?: string;
+  };
 };
 
 export type PriceConfig = {

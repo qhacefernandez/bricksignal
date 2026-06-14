@@ -21,6 +21,7 @@ interface Props {
   proUnlocked?: boolean;
   basic?: BasicSimulatorInput;
   lockedVacancyPercent?: number;
+  started?: boolean;
 }
 
 function viabilityBgClass(status: BasicCalculationResults['viability']): string {
@@ -64,6 +65,7 @@ export default function BasicResultsSummary({
   proUnlocked = false,
   basic,
   lockedVacancyPercent = 0,
+  started = false,
 }: Props) {
   const msg = (key: Parameters<typeof t>[1]) => t(market.language, key);
   const fmt = (v: number, precise = false) => formatCurrencyForMarketConfig(v, market, precise);
@@ -109,6 +111,18 @@ export default function BasicResultsSummary({
     { label: msg('metrics.grossYield'), value: formatPercentValue(results.grossYield, market.locale), locked: false },
   ];
 
+  if (!started) {
+    return (
+      <div
+        className="rounded-xl border border-dashed border-slate-200 bg-slate-50 p-5 lg:sticky lg:top-4"
+        aria-live="polite"
+      >
+        <p className="text-sm font-medium text-slate-700">{msg('simulator.resultsPlaceholderTitle')}</p>
+        <p className="mt-2 text-sm text-slate-500">{msg('simulator.resultsPlaceholder')}</p>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`rounded-xl border border-slate-200 p-5 shadow-sm lg:sticky lg:top-4 ${viabilityBgClass(results.viability)}`}
@@ -119,7 +133,7 @@ export default function BasicResultsSummary({
       <BasicViabilityBadge
         status={results.viability}
         label={results.viabilityLabel}
-        reason={results.viabilityReason}
+        proHint={!proUnlocked ? msg('simulator.viabilityProHint') : undefined}
       />
 
       <dl className="mt-4 grid gap-3">
@@ -149,7 +163,7 @@ export default function BasicResultsSummary({
       {ENABLE_PRO_REPORT && !proUnlocked && basic && (
         <div className="mt-4 rounded-lg border border-brand-200 bg-white/90 p-3">
           <p className="text-xs text-slate-600">
-            {msg('simulator.unlockFull')}: rentabilidad neta, TIR, sensibilidad, PDF y Market Pulse por región.
+            {msg('simulator.unlockFull')}: TIR, sensibilidad, deducción fiscal por intereses, PDF y Market Pulse.
           </p>
           <button
             type="button"

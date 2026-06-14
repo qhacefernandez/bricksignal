@@ -11,6 +11,8 @@ describe('taxProfiles', () => {
       expect(profile.purchaseTaxFields.length).toBeGreaterThan(0);
       expect(profile.annualCostFields.length).toBeGreaterThan(0);
       expect(profile.disclaimer.length).toBeGreaterThan(10);
+      expect(profile.mortgageInterestTax.mode).not.toBe('none');
+      expect(profile.mortgageInterestTax.estimateTaxRatePercent).toBeGreaterThan(0);
     }
   });
 

@@ -1,4 +1,5 @@
-import { frenchMonthlyPayment } from '../mortgage';
+import type { AmortizationMethod, MarketSlug } from '@/config/types';
+import { averageMonthlyPaymentYear1, resolveAmortizationMethod } from '../mortgage';
 import type { MarketSlug } from '@/config/types';
 import type { ViabilityStatus } from '../types';
 
@@ -13,6 +14,7 @@ export interface BasicSimulatorInput {
   downPayment: number;
   interestRate: number;
   mortgageYears: number;
+  amortizationMethod?: AmortizationMethod;
   purchaseCostsPercent: number;
   annualExpensesPercent: number;
   annualExpensesMode: ExpenseInputMode;
@@ -41,7 +43,7 @@ export interface BasicCalculationResults {
 export const DEFAULT_BASIC_INPUT: BasicSimulatorInput = {
   purchasePrice: 150_000,
   monthlyRent: 850,
-  region: 'Madrid',
+  region: '',
   useMortgage: true,
   downPayment: 45_000,
   interestRate: 3.2,
@@ -81,7 +83,8 @@ export function calculateBasicMortgagePayment(input: BasicSimulatorInput): numbe
   if (!input.useMortgage) return 0;
   const financed = Math.max(0, input.purchasePrice - input.downPayment);
   if (financed <= 0) return 0;
-  return frenchMonthlyPayment(financed, input.interestRate, input.mortgageYears);
+  const method = resolveAmortizationMethod(input.amortizationMethod, input.marketSlug);
+  return averageMonthlyPaymentYear1(financed, input.interestRate, input.mortgageYears, method);
 }
 
 export function calculateBasicPurchaseCosts(input: BasicSimulatorInput): number {
@@ -135,28 +138,16 @@ export function calculateBasicViability(
   netYield: number,
   cashflowWarningThreshold = -100,
 ): { status: ViabilityStatus; label: string; reason: string } {
-  if (monthlyCashflow > 0 && netYield >= 4) {
-    return {
-      status: 'green',
-      label: 'Viable',
-      reason: 'Cashflow mensual positivo y rentabilidad neta simplificada ≥ 4%.',
-    };
+  const viable = monthlyCashflow > 0 && netYield >= 4;
+  const highRisk = monthlyCashflow < cashflowWarningThreshold || netYield < 2.5;
+
+  if (viable) {
+    return { status: 'green', label: 'Viable', reason: '' };
   }
-  if (monthlyCashflow < cashflowWarningThreshold || netYield < 2.5) {
-    return {
-      status: 'red',
-      label: 'Riesgo alto',
-      reason:
-        monthlyCashflow < cashflowWarningThreshold
-          ? `Cashflow mensual muy negativo (umbral ${cashflowWarningThreshold}/mes).`
-          : 'Rentabilidad neta simplificada inferior al 2,5%.',
-    };
+  if (highRisk) {
+    return { status: 'red', label: 'No viable', reason: '' };
   }
-  return {
-    status: 'yellow',
-    label: 'Ajustado',
-    reason: 'Cashflow ajustado o rentabilidad neta entre 2,5% y 4%. Conviene analizar en detalle.',
-  };
+  return { status: 'yellow', label: 'No viable', reason: '' };
 }
 
 export function calculateBasicInvestment(

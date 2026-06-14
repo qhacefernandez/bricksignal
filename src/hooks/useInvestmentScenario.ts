@@ -21,6 +21,7 @@ import {
 } from '@/lib/proReports';
 import type { SimulatorInput } from '@/lib/types';
 import { validateBasicScenario } from '@/lib/validation/scenarioValidation';
+import { MORTGAGE_PROFILES } from '@/config/mortgageProfiles';
 import { getMarketInputRanges, valueBucket, vacancyBucket } from '@/config/inputRanges';
 import { getActivePricingVariant } from '@/config/pricing';
 import { useDebouncedValue } from './useDebouncedValue';
@@ -50,11 +51,12 @@ function buildDefaultBasic(market: MarketConfig): BasicSimulatorInput {
   return {
     purchasePrice: ranges.purchasePrice.defaultValue,
     monthlyRent: ranges.monthlyRent.defaultValue,
-    region: market.defaultRegion,
+    region: '',
     useMortgage: true,
     downPayment: ranges.downPayment.defaultValue,
     interestRate: ranges.interestRate.defaultValue,
     mortgageYears: ranges.mortgageYears.defaultValue,
+    amortizationMethod: MORTGAGE_PROFILES[market.slug].defaultAmortizationMethod,
     purchaseCostsPercent: ranges.purchaseCostsPercent.defaultValue,
     annualExpensesPercent: ranges.annualExpensesPercent.defaultValue,
     annualExpensesMode: 'percent',
@@ -98,6 +100,7 @@ export function useInvestmentScenario(market: MarketConfig) {
         vacancyMonths: saved.vacancyMonths ?? 0,
         vacancyPercent: lockedVacancyPercent,
       });
+      setStarted(true);
     }
   }, [market.slug, lockedVacancyPercent]);
 
@@ -287,6 +290,9 @@ export function useInvestmentScenario(market: MarketConfig) {
   const updatePro = useCallback((patch: Partial<SimulatorInput>) => {
     if (!proUnlocked) return;
     setProOverrides((prev) => ({ ...prev, ...patch }));
+    if (patch.amortizationMethod !== undefined) {
+      setBasic((prev) => ({ ...prev, amortizationMethod: patch.amortizationMethod }));
+    }
   }, [proUnlocked]);
 
   const reset = useCallback(() => {

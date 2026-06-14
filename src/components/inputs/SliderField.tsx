@@ -107,13 +107,13 @@ export default function SliderField({
           step={effectiveRange.step}
           disabled={disabled}
           aria-labelledby={labelId}
-          className="relative flex h-11 touch-none select-none items-center"
+          className="relative flex h-11 select-none items-center touch-pan-y"
         >
           <Slider.Track className="relative h-2 grow rounded-full bg-slate-200">
             <Slider.Range className="absolute h-full rounded-full bg-brand-500" />
           </Slider.Track>
           <Slider.Thumb
-            className="block h-11 w-11 rounded-full border-2 border-brand-600 bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2"
+            className="block h-11 w-11 touch-none rounded-full border-2 border-brand-600 bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2"
             aria-labelledby={labelId}
           />
         </Slider.Root>

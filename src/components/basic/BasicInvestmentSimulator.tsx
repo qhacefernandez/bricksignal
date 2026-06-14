@@ -63,18 +63,7 @@ function SimulatorInner({ market }: Props) {
         />
       )}
 
-      <div className="lg:hidden">
-        <BasicResultsSummary
-          market={market}
-          results={basicResults}
-          microcopy={microcopy}
-          proUnlocked={proUnlocked}
-          basic={basicForCalc}
-          lockedVacancyPercent={lockedVacancyPercent}
-        />
-      </div>
-
-      <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_340px]">
         <BasicInputPanel
           market={market}
           input={basic}
@@ -85,16 +74,15 @@ function SimulatorInner({ market }: Props) {
           validation={validation}
           onChange={updateBasic}
         />
-        <div className="hidden lg:block">
-          <BasicResultsSummary
-            market={market}
-            results={basicResults}
-            microcopy={microcopy}
-            proUnlocked={proUnlocked}
-            basic={basicForCalc}
-            lockedVacancyPercent={lockedVacancyPercent}
-          />
-        </div>
+        <BasicResultsSummary
+          market={market}
+          results={basicResults}
+          microcopy={microcopy}
+          proUnlocked={proUnlocked}
+          basic={basicForCalc}
+          lockedVacancyPercent={lockedVacancyPercent}
+          started={started}
+        />
       </div>
 
       {ENABLE_PRO_REPORT && !proUnlocked && (

@@ -29,6 +29,11 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Tipo efectivo impuestos alquiler', 'Orientativo — consulta con profesional', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'deduct_from_profit',
+      estimateTaxRatePercent: 19,
+      note: 'IRPF alquiler: intereses deducibles del rendimiento neto (orientativo).',
+    },
   },
   pt: {
     mode: 'simple',
@@ -47,6 +52,11 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Taxa efetiva rendimento', 'Hipótese editável', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'deduct_from_profit',
+      estimateTaxRatePercent: 28,
+      note: 'IRS categoria F: juros de crédito habitação dedutíveis do rendimento predial (orientativo).',
+    },
   },
   it: {
     mode: 'simple',
@@ -67,6 +77,11 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Aliquota fiscale effettiva', 'Ipotesi semplificata', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'deduct_from_profit',
+      estimateTaxRatePercent: 26,
+      note: 'Regime ordinario: interessi mutuo deducibili. Cedolare secca (21% lordo) non li deduce.',
+    },
   },
   uk: {
     mode: 'regional',
@@ -89,6 +104,12 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Effective tax on rental profit', 'Simplified editable rate', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'tax_credit',
+      estimateTaxRatePercent: 20,
+      creditRatePercent: 20,
+      note: 'Section 24 UK: crédito fiscal del 20% sobre intereses (no deducción directa del beneficio).',
+    },
   },
   us: {
     mode: 'state_based',
@@ -110,6 +131,11 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Effective tax on rental profit', 'Editable simplified rate', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'deduct_from_profit',
+      estimateTaxRatePercent: 24,
+      note: 'Schedule E: mortgage interest deductible against rental income (simplified).',
+    },
   },
   mx: {
     mode: 'state_based',
@@ -131,6 +157,11 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Tipo efectivo impuestos alquiler', 'Hipótesis orientativa', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'deduct_from_profit',
+      estimateTaxRatePercent: 30,
+      note: 'ISR arrendamiento: intereses de crédito deducibles (orientativo).',
+    },
   },
   au: {
     mode: 'state_based',
@@ -152,6 +183,11 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Effective tax on rental profit', 'Simplified editable rate', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'deduct_from_profit',
+      estimateTaxRatePercent: 32.5,
+      note: 'Negative gearing: loan interest deductible against rental income (simplified).',
+    },
   },
   ie: {
     mode: 'simple',
@@ -171,5 +207,10 @@ export const TAX_PROFILES: Record<MarketSlug, TaxProfile> = {
     rentalTaxFields: [
       pct('rental_tax', 'Effective tax on rental profit', 'Editable simplified rate', 0, 'rental_tax_rate', 'profit'),
     ],
+    mortgageInterestTax: {
+      mode: 'deduct_from_profit',
+      estimateTaxRatePercent: 20,
+      note: 'Case V rental: mortgage interest deductible (100% on qualifying residential, simplified).',
+    },
   },
 };

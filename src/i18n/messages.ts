@@ -41,6 +41,10 @@ export type MessageKey =
   | 'simulator.includedAssumptions'
   | 'simulator.includedAssumptionsHelp'
   | 'simulator.quickEstimateDisclaimer'
+  | 'simulator.resultsPlaceholder'
+  | 'simulator.resultsPlaceholderTitle'
+  | 'simulator.viabilityProHint'
+  | 'simulator.interestDeductionTeaser'
   | 'simulator.downloadPdf'
   | 'waitlist.email'
   | 'waitlist.city'
@@ -111,6 +115,10 @@ const es: Messages = {
   'simulator.includedAssumptions': 'Hipótesis incluidas',
   'simulator.includedAssumptionsHelp': 'Para que puedas estimar rápido, usamos hipótesis simplificadas. En PRO podrás editar vacancia, reforma, fiscalidad, escenarios y sensibilidad.',
   'simulator.quickEstimateDisclaimer': 'Estimación rápida con hipótesis simplificadas. Para ver gastos reales, impuestos, sensibilidad, TIR, escenarios y tendencia de mercado, genera el Informe PRO.',
+  'simulator.resultsPlaceholderTitle': 'Tu estimación aparecerá aquí',
+  'simulator.resultsPlaceholder': 'Ajusta precio, alquiler o financiación para ver cashflow y viabilidad.',
+  'simulator.viabilityProHint': 'Descubre la rentabilidad neta real en el Informe PRO.',
+  'simulator.interestDeductionTeaser': 'En PRO incluimos el beneficio fiscal por intereses de hipoteca (orientativo ~{saving}/año al {rate}%).',
   'simulator.downloadPdf': 'Descarga el informe en PDF',
   'waitlist.email': 'Email',
   'waitlist.city': 'Ciudad',
@@ -180,6 +188,10 @@ const en: Messages = {
   'simulator.includedAssumptions': 'Included assumptions',
   'simulator.includedAssumptionsHelp': 'For a fast estimate we use simplified assumptions. In PRO you can edit vacancy, renovation, tax, scenarios and sensitivity.',
   'simulator.quickEstimateDisclaimer': 'Quick estimate with simplified assumptions. For real expenses, taxes, sensitivity, IRR, scenarios and market trends, generate the PRO Report.',
+  'simulator.resultsPlaceholderTitle': 'Your estimate will appear here',
+  'simulator.resultsPlaceholder': 'Adjust price, rent or financing to see cashflow and viability.',
+  'simulator.viabilityProHint': 'Discover real net yield in the PRO Report.',
+  'simulator.interestDeductionTeaser': 'PRO includes mortgage interest tax relief (approx. ~{saving}/yr at {rate}%).',
   'simulator.downloadPdf': 'Download the report as PDF',
   'waitlist.email': 'Email',
   'waitlist.city': 'City',
@@ -249,6 +261,10 @@ const pt: Messages = {
   'simulator.includedAssumptions': 'Hipóteses incluídas',
   'simulator.includedAssumptionsHelp': 'Para estimares rápido, usamos hipóteses simplificadas. No PRO podes editar vacância, obras, fiscalidade, cenários e sensibilidade.',
   'simulator.quickEstimateDisclaimer': 'Estimativa rápida com hipóteses simplificadas. Para despesas reais, impostos, sensibilidade, TIR, cenários e tendência de mercado, gera o Relatório PRO.',
+  'simulator.resultsPlaceholderTitle': 'A tua estimativa aparecerá aqui',
+  'simulator.resultsPlaceholder': 'Ajusta preço, renda ou financiamento para ver cashflow e viabilidade.',
+  'simulator.viabilityProHint': 'Descobre a rentabilidade líquida real no Relatório PRO.',
+  'simulator.interestDeductionTeaser': 'No PRO incluímos dedução fiscal de juros hipotecários (orientativo ~{saving}/ano a {rate}%).',
   'simulator.downloadPdf': 'Descarrega o relatório em PDF',
   'waitlist.email': 'Email',
   'waitlist.city': 'Cidade',
@@ -318,6 +334,10 @@ const it: Messages = {
   'simulator.includedAssumptions': 'Ipotesi incluse',
   'simulator.includedAssumptionsHelp': 'Per una stima veloce usiamo ipotesi semplificate. In PRO puoi modificare sfitto, ristrutturazione, fiscalità, scenari e sensibilità.',
   'simulator.quickEstimateDisclaimer': 'Stima rapida con ipotesi semplificate. Per spese reali, tasse, sensibilità, TIR, scenari e trend di mercato, genera il Report PRO.',
+  'simulator.resultsPlaceholderTitle': 'La tua stima apparirà qui',
+  'simulator.resultsPlaceholder': 'Regola prezzo, affitto o finanziamento per vedere cashflow e fattibilità.',
+  'simulator.viabilityProHint': 'Scopri la rendita netta reale nel Report PRO.',
+  'simulator.interestDeductionTeaser': 'In PRO includiamo la deduzione fiscale degli interessi del mutuo (indicativo ~{saving}/anno al {rate}%).',
   'simulator.downloadPdf': 'Scarica il report in PDF',
   'waitlist.email': 'Email',
   'waitlist.city': 'Città',

@@ -1,7 +1,13 @@
 import { getMarket } from '@/config/markets';
 import { buildIRRCashflows, calculateIRR } from './irr';
-import { frenchMonthlyPayment, remainingBalanceAfterYears } from './mortgage';
+import { AMORTIZATION_METHOD_LABELS, averageMonthlyPaymentYear1, mortgageDebtServiceForYear, mortgageInterestForYear, remainingBalanceAfterYears, resolveAmortizationMethod } from './mortgage';
 import { resolveTaxAmounts } from './taxAssumptions';
+import {
+  estimateRentalTaxForMarket,
+  marketAllowsMortgageInterestDeduction,
+  mortgageInterestForYear,
+  resolveRentalTaxRate,
+} from './calculations/rentalTax';
 import type {
   AnnualCashflowRow,
   CalculationResults,
@@ -126,17 +132,29 @@ export function computeNOI(input: SimulatorInput, overrides?: Partial<{ monthlyR
   return effectiveRent - operating;
 }
 
-export function computeMonthlyMortgagePayment(input: SimulatorInput, interestRate?: number): number {
-  if (!input.useMortgage || input.financedAmount <= 0) return 0;
-  return frenchMonthlyPayment(
-    input.financedAmount,
-    interestRate ?? input.interestRate,
-    input.mortgageYears,
-  );
+function mortgageParams(input: SimulatorInput, interestRate?: number) {
+  return {
+    principal: input.financedAmount,
+    rate: interestRate ?? input.interestRate,
+    years: input.mortgageYears,
+    method: resolveAmortizationMethod(input.amortizationMethod, input.marketSlug),
+  };
 }
 
-export function computeDebtServiceAnnual(input: SimulatorInput, interestRate?: number): number {
-  return computeMonthlyMortgagePayment(input, interestRate) * 12;
+export function computeMonthlyMortgagePayment(input: SimulatorInput, interestRate?: number): number {
+  if (!input.useMortgage || input.financedAmount <= 0) return 0;
+  const { principal, rate, years, method } = mortgageParams(input, interestRate);
+  return averageMonthlyPaymentYear1(principal, rate, years, method);
+}
+
+export function computeDebtServiceAnnual(
+  input: SimulatorInput,
+  interestRate?: number,
+  year = 1,
+): number {
+  if (!input.useMortgage || input.financedAmount <= 0) return 0;
+  const { principal, rate, years, method } = mortgageParams(input, interestRate);
+  return mortgageDebtServiceForYear(principal, rate, years, year, method);
 }
 
 export function applyTax(cashflowBeforeTax: number, taxRate: number): number {
@@ -144,18 +162,49 @@ export function applyTax(cashflowBeforeTax: number, taxRate: number): number {
   return cashflowBeforeTax * (1 - taxRate / 100);
 }
 
+function resolveTaxRateForRental(input: SimulatorInput): number {
+  return resolveRentalTaxRate(input.marketSlug, getEffectiveTaxRate(input));
+}
+
+function computeRentalTaxAmount(
+  input: SimulatorInput,
+  noi: number,
+  debtService: number,
+  annualInterest: number,
+): number {
+  if (!marketAllowsMortgageInterestDeduction(input.marketSlug)) {
+    const taxRate = resolveTaxRateForRental(input);
+    if (taxRate <= 0) return 0;
+    const beforeTax = noi - debtService;
+    return beforeTax > 0 ? beforeTax * (taxRate / 100) : 0;
+  }
+  return estimateRentalTaxForMarket(input.marketSlug, {
+    noi,
+    debtService,
+    annualMortgageInterest: annualInterest,
+    taxRatePercent: resolveTaxRateForRental(input),
+  });
+}
+
 export function computeCashflowAfterTax(input: SimulatorInput, overrides?: {
   monthlyRent?: number;
   interestRate?: number;
   operatingExpenses?: number;
+  mortgageYear?: number;
 }): number {
   const noi = computeNOI(input, {
     monthlyRent: overrides?.monthlyRent,
     operatingExpenses: overrides?.operatingExpenses,
   });
-  const debtService = computeDebtServiceAnnual(input, overrides?.interestRate);
-  const beforeTax = noi - debtService;
-  return applyTax(beforeTax, getEffectiveTaxRate(input));
+  const interestRate = overrides?.interestRate ?? input.interestRate;
+  const year = overrides?.mortgageYear ?? 1;
+  const { principal, rate, years, method } = mortgageParams(input, interestRate);
+  const debtService = computeDebtServiceAnnual(input, interestRate, year);
+  const annualInterest = input.useMortgage && principal > 0
+    ? mortgageInterestForYear(principal, rate, years, year, method)
+    : 0;
+  const tax = computeRentalTaxAmount(input, noi, debtService, annualInterest);
+  return noi - debtService - tax;
 }
 
 export function computeGrossYield(input: SimulatorInput, monthlyRent?: number): number {
@@ -258,11 +307,14 @@ export function buildAnnualCashflows(input: SimulatorInput, maxYears: number): A
     const baseOperating = computeOperatingExpenses(input, grossRent);
     const operatingExpenses = baseOperating * expenseGrowth;
     const noi = effectiveRent - operatingExpenses;
-    const debtService = computeDebtServiceAnnual(input);
+    const debtService = computeDebtServiceAnnual(input, undefined, year);
+    const { principal, rate, years, method } = mortgageParams(input);
+    const annualInterest = input.useMortgage && principal > 0
+      ? mortgageInterestForYear(principal, rate, years, year, method)
+      : 0;
     const cashflowBeforeTax = noi - debtService;
-    const taxes =
-      cashflowBeforeTax > 0 ? cashflowBeforeTax * (getEffectiveTaxRate(input) / 100) : 0;
-    const cashflowAfterTax = cashflowBeforeTax - taxes;
+    const taxes = computeRentalTaxAmount(input, noi, debtService, annualInterest);
+    const cashflowAfterTax = noi - debtService - taxes;
 
     propertyValue *= 1 + input.appreciationPercent / 100;
     const remainingDebt = input.useMortgage
@@ -271,6 +323,7 @@ export function buildAnnualCashflows(input: SimulatorInput, maxYears: number): A
           input.interestRate,
           input.mortgageYears,
           year,
+          method,
         )
       : 0;
 
@@ -386,12 +439,14 @@ export function isVacancySensitive(input: SimulatorInput): boolean {
 
 export function buildAssumptions(input: SimulatorInput): Record<string, string> {
   const vacancy = getVacancyRate(input);
+  const method = resolveAmortizationMethod(input.amortizationMethod, input.marketSlug);
   return {
     'Precio de compra': `${input.purchasePrice.toLocaleString('es-ES')} €`,
     'Comunidad autónoma': input.region,
     'Tipo de inmueble': input.propertyType === 'new_build' ? 'Obra nueva' : 'Segunda mano',
     'Renta mensual': `${input.monthlyRent.toLocaleString('es-ES')} €`,
     'Vacancia': `${(vacancy * 100).toFixed(1)} %`,
+    'Amortización': AMORTIZATION_METHOD_LABELS[method].es,
     'Tipo de interés': `${input.interestRate} %`,
     'Plazo hipoteca': `${input.mortgageYears} años`,
     'Revalorización anual': `${input.appreciationPercent} %`,

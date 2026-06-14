@@ -1,5 +1,7 @@
 import { z } from 'zod';
-import type { MarketSlug } from '@/config/types';
+import type { AmortizationMethod, MarketSlug } from '@/config/types';
+
+export const amortizationMethodSchema = z.enum(['french', 'linear', 'interest_only']);
 
 export const propertyTypeSchema = z.enum(['second_hand', 'new_build']);
 export const propertyStatusSchema = z.enum(['ready', 'needs_renovation']);
@@ -39,6 +41,7 @@ export const simulatorInputSchema = z.object({
   financedAmount: z.number().min(0).max(50_000_000),
   interestRate: z.number().min(0).max(20),
   mortgageYears: z.number().min(1).max(40),
+  amortizationMethod: amortizationMethodSchema.optional(),
   effectiveTaxRate: z.number().min(0).max(50),
   projectionHorizon: projectionHorizonSchema,
   appreciationPercent: z.number().min(-10).max(20),

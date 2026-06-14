@@ -1,9 +1,10 @@
 'use client';
 
-import type { MarketConfig } from '@/config/types';
+import type { AmortizationMethod, MarketConfig } from '@/config/types';
 import type { MarketInputRanges } from '@/config/inputRanges';
 import type { SimulatorInput } from '@/lib/types';
 import { validateVacancyRate } from '@/lib/validation/scenarioValidation';
+import { AMORTIZATION_METHOD_LABELS, resolveAmortizationMethod } from '@/lib/mortgage';
 import CurrencySliderField from '../inputs/CurrencySliderField';
 import PercentageSliderField from '../inputs/PercentageSliderField';
 import ValueModeToggle, { type ValueInputMode } from '../inputs/ValueModeToggle';
@@ -22,6 +23,8 @@ export default function ProAssumptionsPanel({ market, input, ranges, onChange }:
   const vacancyMode: ValueInputMode =
     input.vacancyMonths !== undefined && input.vacancyMonths > 0 ? 'absolute' : 'percent';
   const vacancyWarnings = validateVacancyRate(input.vacancyPercent ?? 0);
+  const amortizationMethod = resolveAmortizationMethod(input.amortizationMethod, market.slug);
+  const amortizationOptions: AmortizationMethod[] = ['french', 'linear', 'interest_only'];
 
   return (
     <section className="rounded-xl border border-slate-200 bg-white p-5">
@@ -74,6 +77,28 @@ export default function ProAssumptionsPanel({ market, input, ranges, onChange }:
         {vacancyWarnings.map((w) => (
           <p key={w.message} className="-mt-4 text-xs text-amber-700">{w.message}</p>
         ))}
+        {input.useMortgage && (
+          <div>
+            <label htmlFor="pro-amortization" className="mb-1 block text-sm font-medium text-slate-800">
+              Sistema de amortización
+            </label>
+            <select
+              id="pro-amortization"
+              value={amortizationMethod}
+              onChange={(e) => onChange({ amortizationMethod: e.target.value as AmortizationMethod })}
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            >
+              {amortizationOptions.map((option) => (
+                <option key={option} value={option}>
+                  {AMORTIZATION_METHOD_LABELS[option][market.language]}
+                </option>
+              ))}
+            </select>
+            <p className="mt-1 text-xs text-slate-500">
+              Afecta cuota, intereses deducibles y proyección anual (francés · alemán · solo intereses).
+            </p>
+          </div>
+        )}
         <CurrencySliderField
           id="pro-renovation"
           label="Reforma"

@@ -133,13 +133,13 @@ Fuentes permitidas: entrada manual, mock demo, CSV admin autorizado, API oficial
 | País | Estrategia | Informe PRO | Radar (Basic / Pro / Investor) |
 |------|------------|------------:|-------------------------------:|
 | España | Competitivo bajo | 14,90 € | 9 / 19 / 39 € |
-| Portugal | Escala/competitivo | 12,90 € | 9 / 19 / 39 € |
+| Portugal | Escala/competitivo | 14,90 € | 9 / 19 / 39 € |
 | Italia | Competitivo | 14,90 € | 12 / 24 / 49 € |
 | UK | Competitivo premium | £19,90 | £14 / £29 / £59 |
 | US | Competitivo agresivo | $19,90 | $19 / $39 / $79 |
 | México | Escala | $199 MXN | $149 / $299 / $599 MXN |
 | Australia | Competitivo premium | A$24,90 | A$29 / A$59 / A$99 |
-| Irlanda | Competitivo premium | 19,90 € | 19 / 39 / 79 € |
+| Irlanda | Competitivo premium | 14,90 € | 19 / 39 / 79 € |
 
 Los Price IDs de Stripe se resuelven por divisa (`STRIPE_PRICE_REPORT_EUR`, `STRIPE_PRICE_RADAR_BASIC_GBP`, etc.). `PRICING_AB` queda reservado para experimentos futuros.
 

@@ -27,7 +27,7 @@ export const MARKET_PRICE_TIERS: Record<MarketSlug, MarketPriceTier> = {
   /** España — competitivo bajo · mercado grande, muchas alternativas gratis */
   es: { strategy: 'competitive_low', proReport: 14.9, radarBasic: 9, radarPro: 19, radarInvestor: 39 },
   /** Portugal — escala/competitivo · sensibilidad alta, mercado menor */
-  pt: { strategy: 'scale_competitive', proReport: 12.9, radarBasic: 9, radarPro: 19, radarInvestor: 39 },
+  pt: { strategy: 'scale_competitive', proReport: 14.9, radarBasic: 9, radarPro: 19, radarInvestor: 39 },
   /** Italia — competitivo · equilibrio tamaño / pricing */
   it: { strategy: 'competitive', proReport: 14.9, radarBasic: 12, radarPro: 24, radarInvestor: 49 },
   /** UK — competitivo premium · cultura buy-to-let */
@@ -39,7 +39,7 @@ export const MARKET_PRICE_TIERS: Record<MarketSlug, MarketPriceTier> = {
   /** Australia — competitivo premium · mercado acostumbrado a datos caros */
   au: { strategy: 'competitive_premium', proReport: 24.9, radarBasic: 29, radarPro: 59, radarInvestor: 99 },
   /** Irlanda — competitivo premium · alto valor percibido, mercado pequeño */
-  ie: { strategy: 'competitive_premium', proReport: 19.9, radarBasic: 19, radarPro: 39, radarInvestor: 79 },
+  ie: { strategy: 'competitive_premium', proReport: 14.9, radarBasic: 19, radarPro: 39, radarInvestor: 79 },
 };
 
 const MARKET_CURRENCY: Record<MarketSlug, CurrencyCode> = {
