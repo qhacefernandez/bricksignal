@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { MarketConfig } from '@/config/types';
 import { track } from '@/lib/analytics';
 import { buildAnalyticsProps } from '@/lib/analyticsContext';

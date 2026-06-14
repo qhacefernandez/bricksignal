@@ -1,6 +1,5 @@
 import type { AmortizationMethod, MarketSlug } from '@/config/types';
 import { averageMonthlyPaymentYear1, resolveAmortizationMethod } from '../mortgage';
-import type { MarketSlug } from '@/config/types';
 import type { ViabilityStatus } from '../types';
 
 export type ExpenseInputMode = 'percent' | 'absolute';

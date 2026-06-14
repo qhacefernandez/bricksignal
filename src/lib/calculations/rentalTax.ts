@@ -25,7 +25,7 @@ export function getMarketRentalTaxConfig(marketSlug?: MarketSlug): MarketRentalT
 
 export function marketAllowsMortgageInterestDeduction(marketSlug?: MarketSlug): boolean {
   const config = getMarketRentalTaxConfig(marketSlug);
-  return config !== undefined && config.mode !== 'none';
+  return config != null && config.mode !== 'none';
 }
 
 export function getDefaultRentalTaxEstimateRate(marketSlug?: MarketSlug): number {

@@ -64,7 +64,7 @@ export default function BasicResultsSummary({
   microcopy,
   proUnlocked = false,
   basic,
-  lockedVacancyPercent = 0,
+  lockedVacancyPercent: _lockedVacancyPercent = 0,
   started = false,
 }: Props) {
   const msg = (key: Parameters<typeof t>[1]) => t(market.language, key);

@@ -5,7 +5,6 @@ import { resolveTaxAmounts } from './taxAssumptions';
 import {
   estimateRentalTaxForMarket,
   marketAllowsMortgageInterestDeduction,
-  mortgageInterestForYear,
   resolveRentalTaxRate,
 } from './calculations/rentalTax';
 import type {

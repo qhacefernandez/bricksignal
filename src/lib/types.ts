@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { AmortizationMethod, MarketSlug } from '@/config/types';
+import type { MarketSlug } from '@/config/types';
 
 export const amortizationMethodSchema = z.enum(['french', 'linear', 'interest_only']);
 
