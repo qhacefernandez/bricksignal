@@ -225,6 +225,27 @@ export function ProReportVisual({ type, language }: { type: ProVisualType; langu
         </MockCard>
       );
 
+    case 'fiscal':
+      return (
+        <MockCard className="p-4">
+          <p className="text-xs font-semibold text-slate-500">{v.fiscalYear1}</p>
+          <div className="mt-3 space-y-2 text-xs">
+            <div className="flex justify-between rounded-lg bg-slate-50 px-3 py-2">
+              <span className="text-slate-600">{v.deductibleInterest}</span>
+              <span className="font-semibold">3.240 €</span>
+            </div>
+            <div className="flex justify-between rounded-lg bg-brand-50 px-3 py-2">
+              <span className="text-brand-800">{v.estimatedTaxSaving}</span>
+              <span className="font-semibold text-brand-900">616 €</span>
+            </div>
+            <div className="flex justify-between rounded-lg bg-slate-50 px-3 py-2">
+              <span className="text-slate-600">{v.amortization}</span>
+              <span className="font-semibold">{v.constantPayment}</span>
+            </div>
+          </div>
+        </MockCard>
+      );
+
     default:
       return null;
   }

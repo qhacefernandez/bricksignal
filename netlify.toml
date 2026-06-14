@@ -25,3 +25,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[edge_functions]]
+  path = "/api/geo-market"
+  function = "geo-market"

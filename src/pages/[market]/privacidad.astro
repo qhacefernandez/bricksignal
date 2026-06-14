@@ -1,7 +1,9 @@
 ---
 import { getMarket, isValidMarketSlug } from '@/config/markets';
+import { getLegalDocument } from '@/i18n/legal';
 import { marketStaticPaths } from '@/lib/staticPaths';
 import MarketLayout from '@/layouts/MarketLayout.astro';
+import LegalDocumentPage from '@/components/market/LegalDocumentPage';
 import type { MarketSlug } from '@/config/types';
 
 export function getStaticPaths() {
@@ -11,12 +13,9 @@ export function getStaticPaths() {
 const { market: marketParam } = Astro.params;
 if (!marketParam || !isValidMarketSlug(marketParam)) return Astro.redirect('/404');
 const market = getMarket(marketParam as MarketSlug);
+const document = getLegalDocument(market, 'privacy');
 ---
 
-<MarketLayout market={market.slug} pathSegment="privacidad">
-  <article class="max-w-2xl space-y-4 text-slate-700">
-    <h1 class="text-3xl font-bold">Privacy — {market.nativeName}</h1>
-    <p><strong>[EDIT]</strong> Data controller for {market.name} market.</p>
-    <p>Simulator data processed in-browser. Voluntary forms via Netlify Forms. Stripe processes payments.</p>
-  </article>
+<MarketLayout market={market.slug} pathSegment="privacidad" title={document.title} noindex={true}>
+  <LegalDocumentPage client:load document={document} />
 </MarketLayout>

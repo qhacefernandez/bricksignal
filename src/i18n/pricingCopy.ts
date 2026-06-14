@@ -105,7 +105,7 @@ const ES: PricingPageCopy = {
     },
     {
       q: '¿Es una suscripción?',
-      a: 'No. El Informe PRO es un pago único por inmueble/escenario. Radar Pro (cuando esté disponible) será suscripción mensual.',
+      a: 'No. El Informe PRO es un pago único por inmueble/escenario. Radar (cuando esté disponible) será suscripción mensual.',
     },
     {
       q: '¿Puedo probar antes de pagar?',
@@ -188,7 +188,7 @@ const EN: PricingPageCopy = {
     },
     {
       q: 'Is it a subscription?',
-      a: 'No. The PRO Report is a one-time payment per property/scenario. Radar Pro (when available) will be a monthly subscription.',
+      a: 'No. The PRO Report is a one-time payment per property/scenario. Radar (when available) will be a monthly subscription.',
     },
     {
       q: 'Can I try before paying?',
@@ -271,7 +271,7 @@ const PT: PricingPageCopy = {
     },
     {
       q: 'É uma subscrição?',
-      a: 'Não. O Relatório PRO é um pagamento único por imóvel/cenário. O Radar Pro (quando disponível) será subscrição mensal.',
+      a: 'Não. O Relatório PRO é um pagamento único por imóvel/cenário. O Radar (quando disponível) será subscrição mensal.',
     },
     {
       q: 'Posso experimentar antes de pagar?',
@@ -354,7 +354,7 @@ const IT: PricingPageCopy = {
     },
     {
       q: 'È un abbonamento?',
-      a: 'No. Il Report PRO è un pagamento unico per immobile/scenario. Radar Pro (quando disponibile) sarà un abbonamento mensile.',
+      a: 'No. Il Report PRO è un pagamento unico per immobile/scenario. Radar (quando disponibile) sarà un abbonamento mensile.',
     },
     {
       q: 'Posso provare prima di pagare?',

@@ -1,4 +1,4 @@
-# Esquema Supabase recomendado — BrickSignal / Radar Pro
+# Esquema Supabase recomendado — BrickSignal / Radar
 
 > v1 no usa base de datos. Este documento describe la arquitectura objetivo para auth, suscripciones y Radar.
 

@@ -3,7 +3,7 @@ export default function AuthorizedDataNotice() {
     <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
       <p className="font-medium">Aviso legal de datos</p>
       <p className="mt-1">
-        Radar Pro no está afiliado a Idealista ni a ningún portal inmobiliario salvo que se indique
+        Radar no está afiliado a Idealista ni a ningún portal inmobiliario salvo que se indique
         expresamente. La integración con portales externos requiere autorización o API oficial. No se realiza
         scraping ni copia no autorizada de contenidos.
       </p>

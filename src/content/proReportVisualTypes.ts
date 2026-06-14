@@ -6,4 +6,5 @@ export type ProVisualType =
   | 'sensitivity'
   | 'marketPulse'
   | 'pdfPreview'
-  | 'checklist';
+  | 'checklist'
+  | 'fiscal';

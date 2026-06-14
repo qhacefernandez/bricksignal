@@ -31,6 +31,12 @@ export function loadPreferredMarket(): MarketSlug {
   return DEFAULT_MARKET_SLUG;
 }
 
+export function hasExplicitPreferredMarket(): boolean {
+  if (typeof localStorage === 'undefined') return false;
+  const saved = localStorage.getItem(MARKET_PREFERRED_STORAGE_KEY);
+  return !!(saved && isValidMarketSlug(saved));
+}
+
 export function scenarioStorageKey(market: MarketSlug): string {
   return `bricksignal-scenario-${market}`;
 }

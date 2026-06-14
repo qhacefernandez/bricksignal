@@ -34,7 +34,7 @@ export default function MarketHero({ market }: MarketHeroProps) {
             href={marketPath(market.slug, 'radar')}
             className="rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50"
           >
-            Radar Pro
+            Radar
           </a>
         )}
       </div>

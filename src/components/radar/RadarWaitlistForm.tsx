@@ -28,7 +28,7 @@ export default function RadarWaitlistForm() {
     return (
       <div className="rounded-xl border border-green-200 bg-green-50 p-8 text-center text-green-800">
         <h2 className="text-xl font-bold">¡Estás en la lista!</h2>
-        <p className="mt-2">Te avisaremos cuando Radar Pro esté disponible en tu zona.</p>
+        <p className="mt-2">Te avisaremos cuando Radar esté disponible en tu zona.</p>
       </div>
     );
   }
@@ -36,7 +36,7 @@ export default function RadarWaitlistForm() {
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-slate-900">Lista de espera Radar Pro</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Lista de espera Radar</h1>
         <p className="mt-2 text-slate-600">
           Cuéntanos qué buscas y te avisaremos del lanzamiento.
         </p>
@@ -138,7 +138,7 @@ export default function RadarWaitlistForm() {
         <label className="flex items-start gap-2 text-xs text-slate-600">
           <input type="checkbox" name="consent" required className="mt-0.5" />
           <span>
-            Acepto recibir comunicaciones sobre Radar Pro y entiendo la{' '}
+            Acepto recibir comunicaciones sobre Radar y entiendo la{' '}
             <a href="/privacidad" className="text-brand-600 underline">
               política de privacidad
             </a>
@@ -150,7 +150,7 @@ export default function RadarWaitlistForm() {
           type="submit"
           className="w-full rounded-lg bg-brand-600 px-4 py-3 text-sm font-semibold text-white hover:bg-brand-700"
         >
-          Unirme a la lista de espera de Radar Pro
+          Unirme a la lista de espera de Radar
         </button>
       </form>
 

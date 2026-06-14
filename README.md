@@ -1,6 +1,6 @@
 # BrickSignal
 
-Plataforma internacional de inversión inmobiliaria en alquiler. **8 mercados** desde una sola codebase: simulador, Informe Pro y Radar Pro (demo/waitlist). Configuración por país — sin hardcodear textos, divisas ni impuestos en componentes.
+Plataforma internacional de inversión inmobiliaria en alquiler. **8 mercados** desde una sola codebase: simulador, Informe Pro y Radar (waitlist). Configuración por país — sin hardcodear textos, divisas ni impuestos en componentes.
 
 ## Stack
 
@@ -56,7 +56,7 @@ El repo incluye `netlify.toml` (build, publish `dist`, functions, Node 20).
 | `STRIPE_SECRET_KEY` | Clave secreta Stripe |
 | `STRIPE_PRICE_REPORT_EUR` | Price ID (`price_...`) del Informe Pro 14,90 € |
 | `STRIPE_PRICE_ID_RADAR_BASIC` | Radar Basic 9 €/mes |
-| `STRIPE_PRICE_ID_RADAR_PRO` | Radar Pro 19 €/mes |
+| `STRIPE_PRICE_ID_RADAR_PRO` | Plan Radar PRO (tier intermedio) 19 €/mes |
 | `STRIPE_PRICE_ID_RADAR_INVESTOR` | Radar Investor 39 €/mes |
 | `STRIPE_WEBHOOK_SECRET` | Webhook Stripe (suscripciones) |
 | `PUBLIC_SITE_URL` | URL pública del sitio |
@@ -72,13 +72,9 @@ ENABLE_SUPABASE_AUTH = false
 ENABLE_AUTHORIZED_LISTING_PROVIDER = false
 ```
 
-## Radar Pro — Activar demo
+## Radar — Activar demo
 
-1. Visita `/radar` (landing) o `/radar/demo` (oportunidades mock).
-2. `ENABLE_RADAR_DEMO=true` en `src/lib/flags.ts` (ya activo por defecto).
-3. El **mock provider** (`src/lib/listings/providers/mockProvider.ts`) sirve datos ficticios — no provienen de portales.
-4. Ajusta criterios y pulsa «Buscar oportunidades».
-5. «Analizar en simulador» precarga el escenario en `localStorage` y abre `/simulador`.
+> Demo desactivada por defecto (`demoEnabled: false` en cada mercado). La landing actual es una página de ventas con waitlist.
 
 ## Arquitectura ListingProvider
 
@@ -217,7 +213,7 @@ Precio según mercado (véase tabla arriba). Tarjeta test: `4242 4242 4242 4242`
 
 ## Waitlist Radar
 
-Formulario Netlify en `/radar/waitlist` con email, zona, presupuesto, cashflow mínimo, estrategia y consentimiento.
+Formulario Netlify en `/{market}/radar/waitlist` con **email**, mercado (hidden) y consentimiento. Los leads incluyen `marketSlug` y `language`.
 
 ## International markets
 
@@ -234,7 +230,7 @@ Formulario Netlify en `/radar/waitlist` con email, zona, presupuesto, cashflow m
 
 Rutas por mercado: `/{market}/`, `/{market}/simulador`, `/{market}/precios`, `/{market}/radar`, etc.
 
-La home global `/` muestra selector de país (sin geolocalización invasiva).
+La home global `/` detecta el país del visitante (Netlify Edge, sin pedir permiso GPS) y redirige al mercado correspondiente. Si no hay coincidencia o el usuario ya eligió mercado antes, muestra el selector manual. La elección manual se guarda en `localStorage` (`bricksignal-preferred-market`).
 
 ### Añadir un nuevo país
 
@@ -266,7 +262,7 @@ Radar solo usa: mock demo, entrada manual, CSV admin autorizado o `authorizedApi
 - `/{market}/` — Landing localizada
 - `/{market}/simulador` — Simulador
 - `/{market}/precios` — Pricing
-- `/{market}/radar/*` — Radar Pro
+- `/{market}/radar/*` — Radar
 - `/dashboard/*` — Prototipo (TODO Supabase Auth)
 
 Legacy redirects: `/simulador` → `/es/simulador`, `/radar` → `/es/radar`
@@ -298,4 +294,4 @@ Configura webhook Stripe apuntando a:
 
 ## Disclaimer
 
-Herramienta orientativa. No constituye asesoramiento financiero, fiscal, legal ni recomendación de compra. Radar Pro no está afiliado a Idealista ni a portales salvo integración autorizada expresa.
+Herramienta orientativa. No constituye asesoramiento financiero, fiscal, legal ni recomendación de compra. Radar no está afiliado a Idealista ni a portales salvo integración autorizada expresa.

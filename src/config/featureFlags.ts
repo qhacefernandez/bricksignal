@@ -27,4 +27,5 @@ export function isFeatureEnabled(features: ProductFeature, feature: keyof Produc
 }
 
 export const MARKET_PREFERRED_STORAGE_KEY = 'bricksignal-preferred-market';
+export const COOKIE_CONSENT_STORAGE_KEY = 'bricksignal-cookie-consent';
 export const DEFAULT_MARKET_SLUG: MarketSlug = 'es';

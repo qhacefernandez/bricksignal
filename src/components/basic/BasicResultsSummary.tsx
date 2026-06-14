@@ -163,7 +163,7 @@ export default function BasicResultsSummary({
       {ENABLE_PRO_REPORT && !proUnlocked && basic && (
         <div className="mt-4 rounded-lg border border-brand-200 bg-white/90 p-3">
           <p className="text-xs text-slate-600">
-            {msg('simulator.unlockFull')}: TIR, sensibilidad, deducción fiscal por intereses, PDF y Market Pulse.
+            {msg('simulator.unlockFull')}: TIR, sensibilidad, fiscalidad, PDF y Market Pulse.
           </p>
           <button
             type="button"

@@ -1,5 +1,6 @@
 export type AnalyticsEvent =
   | 'market_selected'
+  | 'market_geo_redirect'
   | 'simulator_started'
   | 'simulator_completed'
   | 'pro_cta_clicked'
@@ -47,3 +48,5 @@ export function track(event: AnalyticsEvent, props?: Record<string, string | num
     console.debug('[analytics]', event, props ?? '');
   }
 }
+
+export { hasAnalyticsConsent, loadAnalyticsScript } from './cookieConsent';

@@ -15,7 +15,6 @@
         "npm:@astrojs/react@^4.2.1",
         "npm:@astrojs/tailwind@^6.0.2",
         "npm:@netlify/functions@^3.1.2",
-        "npm:@radix-ui/react-slider@^1.4.0",
         "npm:@testing-library/jest-dom@^6.9.1",
         "npm:@testing-library/react@^16.3.2",
         "npm:@types/react-dom@^19.1.2",

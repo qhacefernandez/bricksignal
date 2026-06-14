@@ -102,7 +102,7 @@ export default function MarketPricingPage({ market }: { market: MarketConfig }) 
         </div>
 
         <div className="flex flex-col rounded-2xl border border-dashed border-slate-300 bg-slate-50/80 p-6">
-          <p className="text-sm font-semibold text-slate-500">Radar Pro</p>
+          <p className="text-sm font-semibold text-slate-500">Radar</p>
           <p className="mt-2 text-4xl font-bold text-slate-400">
             {radarBasic ?? copy.radarComingSoon}
           </p>

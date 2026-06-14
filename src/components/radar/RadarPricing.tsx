@@ -32,7 +32,7 @@ const PLANS = [
     highlight: false,
   },
   {
-    name: 'Radar Basic',
+    name: 'Basic',
     price: '9 €',
     period: '/mes',
     priceId: 'basic',
@@ -41,7 +41,7 @@ const PLANS = [
     highlight: true,
   },
   {
-    name: 'Radar Pro',
+    name: 'Pro',
     price: '19 €',
     period: '/mes',
     priceId: 'pro',
@@ -56,7 +56,7 @@ const PLANS = [
     highlight: false,
   },
   {
-    name: 'Radar Investor',
+    name: 'Investor',
     price: '39 €',
     period: '/mes',
     priceId: 'investor',
@@ -65,6 +65,7 @@ const PLANS = [
       'Alertas avanzadas',
       'Scoring configurable',
       'Comparativa de cartera',
+      'API y MCP (gen-AI)',
     ],
     cta: 'Reservar early access',
     highlight: false,
@@ -101,7 +102,7 @@ export default function RadarPricing() {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-slate-900">Planes Radar Pro</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Planes Radar</h1>
         <p className="mt-2 text-slate-600">Elige el nivel de alertas y análisis que necesitas.</p>
       </div>
 

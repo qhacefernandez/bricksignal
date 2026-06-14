@@ -65,7 +65,7 @@ export default function RadarDemo() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">Radar Pro — Demo</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Radar — Demo</h1>
         <p className="mt-2 text-slate-600">
           Oportunidades de ejemplo ordenadas por score. Sin datos de portales externos.
         </p>

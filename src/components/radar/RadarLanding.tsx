@@ -11,7 +11,7 @@ export default function RadarLanding() {
           Encuentra inmuebles que encajan con tu rentabilidad objetivo.
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-          Configura tu presupuesto, hipoteca, cashflow mínimo y zona. Radar Pro ordena oportunidades por
+          Configura tu presupuesto, hipoteca, cashflow mínimo y zona. Radar ordena oportunidades por
           rentabilidad, riesgo y margen de seguridad.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -25,7 +25,7 @@ export default function RadarLanding() {
             href="/radar/waitlist"
             className="rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50"
           >
-            Unirme a la lista de espera de Radar Pro
+            Unirme a la lista de espera de Radar
           </a>
         </div>
       </section>
@@ -48,7 +48,7 @@ export default function RadarLanding() {
       <section className="rounded-xl border border-slate-200 bg-white p-8">
         <h2 className="text-xl font-bold text-slate-900">Buscar pisos rentables para alquilar</h2>
         <p className="mt-2 text-slate-600">
-          Radar Pro te ayuda a encontrar inmuebles con cashflow positivo según tus hipótesis. Compatible con
+          Radar te ayuda a encontrar inmuebles con cashflow positivo según tus hipótesis. Compatible con
           fuentes autorizadas y análisis manual. Puedes estudiar cualquier piso que encuentres y pasarlo al{' '}
           <a href="/simulador" className="text-brand-600 underline">
             simulador

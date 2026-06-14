@@ -30,6 +30,11 @@ export interface ProVisualCopy {
   dueDiligence: string;
   moreSteps: string;
   checklistItems: string[];
+  fiscalYear1: string;
+  deductibleInterest: string;
+  estimatedTaxSaving: string;
+  amortization: string;
+  constantPayment: string;
 }
 
 const ES: ProVisualCopy = {
@@ -68,6 +73,11 @@ const ES: ProVisualCopy = {
     '3–5 comparables de renta',
     'Plan de salida definido',
   ],
+  fiscalYear1: 'Fiscalidad · año 1',
+  deductibleInterest: 'Intereses deducibles*',
+  estimatedTaxSaving: 'Ahorro fiscal estimado',
+  amortization: 'Amortización',
+  constantPayment: 'Cuota constante',
 };
 
 const EN: ProVisualCopy = {
@@ -106,6 +116,11 @@ const EN: ProVisualCopy = {
     '3–5 rent comparables',
     'Exit plan defined',
   ],
+  fiscalYear1: 'Tax · year 1',
+  deductibleInterest: 'Deductible interest*',
+  estimatedTaxSaving: 'Estimated tax saving',
+  amortization: 'Amortization',
+  constantPayment: 'Level payment',
 };
 
 const PT: ProVisualCopy = {
@@ -144,6 +159,11 @@ const PT: ProVisualCopy = {
     '3–5 comparáveis de renda',
     'Plano de saída definido',
   ],
+  fiscalYear1: 'Fiscalidade · ano 1',
+  deductibleInterest: 'Juros dedutíveis*',
+  estimatedTaxSaving: 'Poupança fiscal estimada',
+  amortization: 'Amortização',
+  constantPayment: 'Prestação constante',
 };
 
 const IT: ProVisualCopy = {
@@ -182,6 +202,11 @@ const IT: ProVisualCopy = {
     '3–5 comparabili affitto',
     'Piano di uscita definito',
   ],
+  fiscalYear1: 'Fiscalità · anno 1',
+  deductibleInterest: 'Interessi deducibili*',
+  estimatedTaxSaving: 'Risparmio fiscale stimato',
+  amortization: 'Ammortamento',
+  constantPayment: 'Rata costante',
 };
 
 const BY_LANG: Record<LanguageCode, ProVisualCopy> = { es: ES, en: EN, pt: PT, it: IT };

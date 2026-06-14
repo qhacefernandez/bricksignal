@@ -2,12 +2,6 @@
 
 import type { MarketConfig } from '@/config/types';
 import type { BasicSimulatorInput } from '@/lib/calculations/basic';
-import { calculateBasicNOI } from '@/lib/calculations/basic';
-import {
-  estimateInterestTaxSavingForMarket,
-  getDefaultRentalTaxEstimateRate,
-  marketAllowsMortgageInterestDeduction,
-} from '@/lib/calculations/rentalTax';
 import { AMORTIZATION_METHOD_LABELS, resolveAmortizationMethod } from '@/lib/mortgage';
 import type { ValidationMessage } from '@/lib/validation/scenarioValidation';
 import { t } from '@/i18n/messages';
@@ -22,7 +16,6 @@ import YearSliderField from '../inputs/YearSliderField';
 import type { MarketInputRanges } from '@/config/inputRanges';
 import { formatPercentValue } from '@/lib/format/percent';
 import { formatPriceLabel } from '@/lib/currency';
-import { formatCurrencyForMarketConfig } from '@/lib/format/currency';
 import { track } from '@/lib/analytics';
 import { getActivePricingVariant } from '@/config/pricing';
 
@@ -75,25 +68,6 @@ export default function BasicInputPanel({
   const amortizationLabel = AMORTIZATION_METHOD_LABELS[
     resolveAmortizationMethod(input.amortizationMethod, market.slug)
   ][market.language];
-
-  const interestDeductionTeaser = (() => {
-    if (!marketAllowsMortgageInterestDeduction(market.slug) || !input.useMortgage) return null;
-    const financed = Math.max(0, input.purchasePrice - input.downPayment);
-    if (financed <= 0) return null;
-    const estimateRate = getDefaultRentalTaxEstimateRate(market.slug);
-    const saving = estimateInterestTaxSavingForMarket(market.slug, {
-      noi: calculateBasicNOI(input),
-      principal: financed,
-      annualRatePercent: input.interestRate,
-      years: input.mortgageYears,
-      taxRatePercent: estimateRate,
-      amortizationMethod: input.amortizationMethod,
-    });
-    if (saving <= 0) return null;
-    return msg('simulator.interestDeductionTeaser')
-      .replace('{saving}', formatCurrencyForMarketConfig(saving, market))
-      .replace('{rate}', formatPercentValue(estimateRate, market.locale, 0));
-  })();
 
   return (
     <div className="space-y-6">
@@ -173,8 +147,10 @@ export default function BasicInputPanel({
               onChange={(v) => onChange({ mortgageYears: v }, 'mortgageYears')}
               range={ranges.mortgageYears}
             />
-            {interestDeductionTeaser && (
-              <p className="rounded-lg bg-brand-50 px-3 py-2 text-xs text-brand-800">{interestDeductionTeaser}</p>
+            {input.useMortgage && (
+              <p className="rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600">
+                {msg('simulator.fiscalProTip')}
+              </p>
             )}
           </div>
         )}
