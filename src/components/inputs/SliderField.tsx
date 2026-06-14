@@ -1,6 +1,5 @@
 'use client';
 
-import * as Slider from '@radix-ui/react-slider';
 import { useCallback, useId, useMemo, useState } from 'react';
 import { expandSliderRange, type SliderRangeConfig } from '@/config/inputRanges';
 import { isOutOfSliderRange } from '@/lib/validation/scenarioValidation';
@@ -24,6 +23,18 @@ export interface SliderFieldProps {
   outOfRangeMessage?: string;
 }
 
+/** Estilos cross-browser; input nativo type=range funciona en iOS Safari (Radix pointer events no). */
+const RANGE_CLASS =
+  'h-11 w-full cursor-pointer appearance-none bg-transparent ' +
+  '[&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-slate-200 ' +
+  '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:mt-[-18px] [&::-webkit-slider-thumb]:h-11 [&::-webkit-slider-thumb]:w-11 ' +
+  '[&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-brand-600 ' +
+  '[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md ' +
+  '[&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-slate-200 ' +
+  '[&::-moz-range-thumb]:box-border [&::-moz-range-thumb]:h-11 [&::-moz-range-thumb]:w-11 [&::-moz-range-thumb]:rounded-full ' +
+  '[&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-brand-600 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:shadow-md ' +
+  'disabled:cursor-not-allowed disabled:opacity-60';
+
 export default function SliderField({
   id,
   label,
@@ -41,6 +52,7 @@ export default function SliderField({
 }: SliderFieldProps) {
   const helpId = useId();
   const labelId = useId();
+  const rangeId = `${id}-range`;
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState('');
 
@@ -61,10 +73,10 @@ export default function SliderField({
     if (Number.isFinite(parsed)) onChange(parsed);
   };
 
-  const handleSliderChange = useCallback(
-    (vals: number[]) => {
-      const v = vals[0];
-      if (v !== undefined) onChange(roundToStep(v, effectiveRange.step));
+  const handleRangeChange = useCallback(
+    (raw: number) => {
+      if (!Number.isFinite(raw)) return;
+      onChange(roundToStep(raw, effectiveRange.step));
     },
     [onChange, effectiveRange.step],
   );
@@ -99,24 +111,22 @@ export default function SliderField({
         {suffix && <span className="text-sm text-slate-500">{suffix}</span>}
       </div>
       <div className="mt-4 px-1">
-        <Slider.Root
-          value={[sliderValue]}
-          onValueChange={handleSliderChange}
+        <input
+          id={rangeId}
+          type="range"
+          disabled={disabled}
+          aria-labelledby={labelId}
+          aria-valuemin={effectiveRange.min}
+          aria-valuemax={effectiveRange.max}
+          aria-valuenow={sliderValue}
           min={effectiveRange.min}
           max={effectiveRange.max}
           step={effectiveRange.step}
-          disabled={disabled}
-          aria-labelledby={labelId}
-          className="relative flex h-11 select-none items-center touch-pan-y"
-        >
-          <Slider.Track className="relative h-2 grow rounded-full bg-slate-200">
-            <Slider.Range className="absolute h-full rounded-full bg-brand-500" />
-          </Slider.Track>
-          <Slider.Thumb
-            className="block h-11 w-11 touch-none rounded-full border-2 border-brand-600 bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2"
-            aria-labelledby={labelId}
-          />
-        </Slider.Root>
+          value={sliderValue}
+          onChange={(e) => handleRangeChange(Number(e.target.value))}
+          onInput={(e) => handleRangeChange(Number(e.currentTarget.value))}
+          className={`${RANGE_CLASS} accent-brand-600`}
+        />
         <div className="mt-1 flex justify-between text-xs text-slate-400">
           <span>{formatDisplay(effectiveRange.min)}</span>
           <span>{formatDisplay(effectiveRange.max)}</span>

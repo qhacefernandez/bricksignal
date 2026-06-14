@@ -48,4 +48,21 @@ describe('SliderField', () => {
     expect(screen.getByRole('textbox')).toBeInTheDocument();
     expect(screen.getByRole('slider')).toBeInTheDocument();
   });
+
+  it('fires onChange when native range moves', () => {
+    const onChange = vi.fn();
+    render(
+      <SliderField
+        id="price"
+        label="Precio"
+        value={100_000}
+        onChange={onChange}
+        range={{ min: 50_000, max: 600_000, step: 5_000, defaultValue: 100_000 }}
+        formatDisplay={(v) => String(v)}
+      />,
+    );
+    const slider = screen.getByRole('slider');
+    fireEvent.input(slider, { target: { value: '150000' } });
+    expect(onChange).toHaveBeenCalledWith(150_000);
+  });
 });
